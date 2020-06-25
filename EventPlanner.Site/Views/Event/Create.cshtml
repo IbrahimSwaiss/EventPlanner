@@ -1,0 +1,151 @@
+﻿@model EventPlanner.Site.ViewModels.EventVm
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm("Create", "Event", FormMethod.Post, new { enctype = "multipart/form-data" })) {
+
+<div class="form-horizontal">
+    <h4>EventVm</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @*https://xdsoft.net/jqplugins/datetimepicker/*@
+        @Html.LabelFor(model => model.Start, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Start, new { htmlAttributes = new { @class = "form-control", id = "startDateTimePicker" } })
+            @Html.ValidationMessageFor(model => model.Start, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.End, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.End, new { htmlAttributes = new { @class = "form-control", id = "endDateTimePicker" } })
+            @Html.ValidationMessageFor(model => model.End, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.File, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-3">
+            @Html.TextBoxFor(m => m.File, new { type = "file", name = "File", accept = "png,jpg" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.EventTypeId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.EventTypeId,
+    new SelectList(Model.EventTypes, "Id", "Name"),
+     new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PlaceId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.PlaceId,
+     new SelectList(Model.Places, "Id", "Name"), new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Comment, new { @class = "form-control" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ServicesSource, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @{
+                List<string> types = Model.ServicesSource.Select(s => s.ServiceType).Distinct().ToList();
+
+                foreach (var type in types) {
+                    <div class="service-area">
+                        <div class="row service-header">
+                            <div class="col">
+                                <div class="bg-success border border-dark">
+                                    <label class="text-light px-3 py-1 service-header-label">@type</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row service-details">
+                            <div class="col">
+                                @for (int i = 0; i < Model.ServicesSource.Count; i++) {
+                                    if (Model.ServicesSource[i].ServiceType != type) {
+                                        continue;
+                                    }
+
+                                    var id = $"cb-{i}";
+                                    <div class="row">
+                                        <div class="col">
+                                            @Html.CheckBoxFor(m => m.ServicesSource[i].IsSelected,
+                                                new { id = id, @class = "service-cb", serviceType = type, cost = Model.ServicesSource[i].CostPerHour })
+                                            @Html.LabelFor(m => m.ServicesSource[i].Name, Model.ServicesSource[i].Name, new { @for = id })
+                                            @Html.HiddenFor(m => m.ServicesSource[i].Id)
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <div class="col-md-offset-2 col-1">
+            <input type="submit" value="Book" class="btn btn-success" />
+        </div>
+        <div class="col pt-2">
+            <Span>Total: </Span>
+            <span id="total">0</span>
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/jquery.datetimepicker.css")" />
+    <script src="@Url.Content("~/Scripts/jquery.datetimepicker.js")" type="text/javascript"></script>
+
+    <script src="@Url.Content("~/Scripts/src/event.js")"></script>
+}
+
+@*@{
+        if (TempData["CreateErrors"] != null) {
+            var errors = (List<ModelError>)TempData["CreateErrors"];
+            if (errors.Count > 0) {
+                <div class="row">
+                    <div class="col">
+                        @foreach (var error in errors) {
+                            <div class="alert alert-danger">
+                                @error.ErrorMessage
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        }
+    }*@
+@*@if (TempData["CreateErrors"] )) {
+    } *@

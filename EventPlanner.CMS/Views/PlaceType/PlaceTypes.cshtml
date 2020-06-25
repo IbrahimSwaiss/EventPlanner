@@ -1,0 +1,48 @@
+﻿@model IEnumerable<EventPlanner.CMS.ViewModels.EventVMs.TypeVm>
+
+@{
+    ViewBag.Title = "PlaceTypes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col">
+
+        <h2>PlaceTypes</h2>
+
+        <p>
+            @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-success" })
+        </p>
+        <div class="table-responsive w-75">
+
+            <table class="table table-sm table-striped table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th style="width: 15%">Actions</th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model) {
+                    <tr>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-link text-info" })
+                            <button class="btn btn-link text-danger delete-place-type" data-place-type-id="@item.Id">Delete</button>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="@Url.Content("~/Scripts/src/site/placeType.js")"></script>
+}

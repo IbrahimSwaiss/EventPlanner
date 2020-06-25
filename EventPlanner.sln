@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventPlanner.CMS", "EventPlanner.CMS\EventPlanner.CMS.csproj", "{0C2D238E-4DEB-4C41-87D2-3E90DCED0113}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventPlanner.Site", "EventPlanner.Site\EventPlanner.Site.csproj", "{2461DC9F-6930-46B7-849C-27FA2E9EC528}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0C2D238E-4DEB-4C41-87D2-3E90DCED0113}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C2D238E-4DEB-4C41-87D2-3E90DCED0113}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C2D238E-4DEB-4C41-87D2-3E90DCED0113}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C2D238E-4DEB-4C41-87D2-3E90DCED0113}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2461DC9F-6930-46B7-849C-27FA2E9EC528}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2461DC9F-6930-46B7-849C-27FA2E9EC528}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2461DC9F-6930-46B7-849C-27FA2E9EC528}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2461DC9F-6930-46B7-849C-27FA2E9EC528}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AEE13D11-A93F-4D57-92B7-BC7EAD7BE828}
+	EndGlobalSection
+EndGlobal
